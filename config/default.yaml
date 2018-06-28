@@ -1,0 +1,170 @@
+# swagger configuration file
+
+# values in the swagger hash are system configuration for swagger-node
+swagger:
+
+  fittingsDirs: [ api/fittings ]
+  defaultPipe: null
+  swaggerControllerPipe: swagger_controllers  # defines the standard processing pipe for controllers
+
+  # values defined in the bagpipes key are the bagpipes pipes and fittings definitions
+  # (see https://github.com/apigee-127/bagpipes)
+  bagpipes:
+
+    _router:
+      name: swagger_router
+      mockMode: false
+      mockControllersDirs: [ api/mocks ]
+      controllersDirs: [ api/controllers ]
+
+    _swagger_validate:
+      name: swagger_validator
+      validateResponse: true
+
+    # pipe for all swagger-node controllers
+    swagger_controllers:
+      - onError: json_error_handler
+      - cors
+      - swagger_security
+      - _swagger_validate
+      - express_compatibility
+      - _router
+
+    # pipe to serve swagger (endpoint is in swagger.yaml)
+    swagger_raw:
+      name: swagger_raw
+
+services:
+  dog: https://dog.ceo/api
+  iextrading: https://ws-api.iextrading.com/1.0
+  breaking_bad: https://breaking-bad-quotes.herokuapp.com/v1
+  football: http://api.football-data.org/v1
+  slack_web_api: https://slack.com/api/chat.postMessage
+
+allowed_categories:
+  - breakingbad
+  - dog
+  - stock
+  - football
+
+random_img: https://picsum.photos/___/___/?random
+random_names:
+  - Sophia
+  - Aiden
+  - Emma
+  - Jackson
+  - Olivia
+  - Ethan
+  - Isabella
+  - Liam
+  - Ava
+  - Mason
+  - Lily
+  - Noah
+  - Zoe
+  - Lucas
+  - Chloe
+  - Jacob
+  - Mia
+  - Jayden
+  - Madison
+  - Jack
+  - Emily
+  - Logan
+  - Ella
+  - Ryan
+  - Madelyn
+  - Caleb
+  - Abigail
+  - Benjamin
+  - Aubrey
+  - William
+  - Addison
+  - Michael
+  - Avery
+  - Alexander
+  - Layla
+  - Elijah
+  - Hailey
+  - Matthew
+  - Amelia
+  - Dylan
+  - Hannah
+  - James
+  - Charlotte
+  - Owen
+  - Kaitlyn
+  - Connor
+  - Harper
+  - Brayden
+  - Kaylee
+  - Carter
+  - Sophie
+  - Landon
+  - Mackenzie
+  - Joshua
+  - Peyton
+  - Luke
+  - Riley
+  - Daniel
+  - Grace
+  - Gabriel
+  - Brooklyn
+  - Nicholas
+  - Sarah
+  - Nathan
+  - Aaliyah
+  - Oliver
+  - Anna
+  - Henry
+  - Arianna
+  - Andrew
+  - Ellie
+  - Gavin
+  - Natalie
+  - Cameron
+  - Isabelle
+  - Eli
+  - Lillian
+  - Max
+  - Evelyn
+  - Isaac
+  - Elizabeth
+  - Evan
+  - Lyla
+  - Samuel
+  - Lucy
+  - Grayson
+  - Claire
+  - Tyler
+  - Makayla
+  - Zachary
+  - Kylie
+  - Wyatt
+  - Audrey
+  - Joseph
+  - Maya
+  - Charlie
+  - Leah
+  - Hunter
+  - Gabriella
+  - David
+
+static_random_messages:
+  dog:
+    - A dog is the only thing on earth that loves you more than you love yourself.
+    - No one appreciates the very special genius of your conversation as much as the dog does.
+    - If aliens saw us walking our dogs and picking up their poop, who would they think is in charge?
+    - What do dogs do on their day off? Can't lie around – that's their job!
+    - Outside of a dog, a book is a man’s best friend. Inside of a dog it’s too dark to read.
+  breakingbad:
+    - Chemistry is, well technically, chemistry is the study of matter. But I prefer to see it as the study of change.
+    - You know I, I just think, that ah, things have a way of working themselves out.
+    - Cheer up beautiful people… this is where you get to make it right.
+  stock:
+    - Forget the stocks, crypto is the future!
+    - Might as well just go to the casino and gamble.
+    - Go check out whichever stock you want on Google.
+  football:
+    - Football what?!
+    - Not in the mood for that today.
